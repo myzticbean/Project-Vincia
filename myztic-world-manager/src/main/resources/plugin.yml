@@ -1,0 +1,6 @@
+name: MyzticWorldManager
+version: '${project.version}'
+main: io.myztic.MyzticWorldManager
+api-version: 1.19
+load: STARTUP
+authors: [ myzticbean ]
