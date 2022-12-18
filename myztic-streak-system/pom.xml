@@ -72,7 +72,7 @@
         </dependency>
         <dependency>
             <groupId>io.myztic</groupId>
-            <artifactId>myztic-core</artifactId>
+            <artifactId>MyzticCore</artifactId>
             <version>1.0-dev</version>
             <scope>provided</scope>
         </dependency>
