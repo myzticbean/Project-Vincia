@@ -2,4 +2,5 @@ name: MyzticCore
 version: '${project.version}'
 main: io.myztic.MyzticCore
 api-version: 1.19
+load: STARTUP
 authors: [ myzticbean ]

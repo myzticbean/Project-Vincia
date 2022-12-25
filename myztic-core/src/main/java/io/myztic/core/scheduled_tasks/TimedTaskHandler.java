@@ -1,4 +1,4 @@
-package io.myztic.scheduled_tasks;
+package io.myztic.core.scheduled_tasks;
 
 public class TimedTaskHandler {
 

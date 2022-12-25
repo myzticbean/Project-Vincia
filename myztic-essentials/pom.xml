@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.myztic</groupId>
-    <artifactId>MyzticWorldManager</artifactId>
+    <artifactId>MyzticEssentials</artifactId>
     <version>1.0-dev</version>
     <packaging>jar</packaging>
 
-    <name>MyzticWorldManager</name>
+    <name>MyzticEssentials</name>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

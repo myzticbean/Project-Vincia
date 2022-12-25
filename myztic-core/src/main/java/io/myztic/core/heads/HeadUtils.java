@@ -1,4 +1,4 @@
-package io.myztic.heads;
+package io.myztic.core.heads;
 
 import me.kodysimpson.simpapi.heads.SkullCreator;
 

@@ -1,4 +1,4 @@
-package io.myztic.bukkit;
+package io.myztic.core.bukkit;
 
 import io.papermc.lib.PaperLib;
 import me.kodysimpson.simpapi.colors.ColorTranslator;

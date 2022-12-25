@@ -1,4 +1,4 @@
-package io.myztic.strings;
+package io.myztic.core.strings;
 
 public class MStringUtils {
 

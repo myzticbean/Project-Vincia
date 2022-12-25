@@ -1,8 +1,8 @@
-package io.myztic;
+package io.myztic.essentials;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class MyzticStreakSystem extends JavaPlugin {
+public final class MyzticEssentials extends JavaPlugin {
 
     @Override
     public void onEnable() {

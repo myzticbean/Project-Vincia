@@ -1,10 +1,10 @@
-package io.myztic.fileio;
+package io.myztic.core.fileio;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.myztic.MyzticCore;
-import io.myztic.bukkit.LoggerUtils;
+import io.myztic.core.MyzticCore;
+import io.myztic.core.bukkit.LoggerUtils;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,9 +1,10 @@
-package io.myztic;
+package io.myztic.core;
 
-import io.myztic.bukkit.LoggerUtils;
-import io.myztic.scheduled_tasks.TaskTimer30Sec;
-import io.myztic.scheduled_tasks.TaskTimer5Min;
-import io.myztic.scheduled_tasks.TaskTimer5Sec;
+import io.myztic.core.bukkit.LoggerUtils;
+import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.scheduled_tasks.TaskTimer30Sec;
+import io.myztic.core.scheduled_tasks.TaskTimer5Min;
+import io.myztic.core.scheduled_tasks.TaskTimer5Sec;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,9 +12,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class MyzticCore extends JavaPlugin {
 
     private static Plugin plugin;
-    private static final String PLUGIN_PREFIX = "[MyzticCore]";
+    private static final String PLUGIN_PREFIX = ConfigProvider.getInst().PLUGIN_PREFIX;
 
-    public static Plugin getInstance() { return plugin; }
+    public static Plugin getInst() { return plugin; }
     @Override
     public void onEnable() {
         LoggerUtils.logInfo(PLUGIN_PREFIX, "Starting MyzticCore");

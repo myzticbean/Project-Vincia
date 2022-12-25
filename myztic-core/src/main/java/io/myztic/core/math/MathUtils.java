@@ -1,4 +1,4 @@
-package io.myztic.math;
+package io.myztic.core.math;
 
 public class MathUtils {
 

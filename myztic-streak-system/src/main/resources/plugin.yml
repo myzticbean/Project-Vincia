@@ -3,5 +3,5 @@ version: '${project.version}'
 main: io.myztic.MyzticStreakSystem
 api-version: 1.19
 authors: [ myzticbean ]
-softdepend:
+depend:
   - MyzticCore
