@@ -3,8 +3,8 @@ package io.myztic.core.fileio;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.myztic.core.MyzticCore;
 import io.myztic.core.bukkit.LoggerUtils;
+import io.myztic.core.config.ConfigProvider;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,15 +29,15 @@ public class FileUtils {
                     gson.toJson(listToBeSaved, writer);
                     writer.flush();
                     writer.close();
-                    LoggerUtils.logInfo(MyzticCore.getPrefix(), "Saved hidden shops to file");
+                    LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "Saved hidden shops to file");
                 } else {
-                    LoggerUtils.logInfo(MyzticCore.getPrefix(), "Could not create new file");
+                    LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "Could not create new file");
                 }
             } catch (IOException e) {
-                LoggerUtils.logError(MyzticCore.getPrefix(), "Error occurred: " + e.getMessage(), e);
+                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Error occurred: " + e.getMessage(), e);
             }
         } else {
-            LoggerUtils.logInfo(MyzticCore.getPrefix(), "Path or file does not exist");
+            LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "Path or file does not exist");
         }
     }
 
@@ -60,10 +60,10 @@ public class FileUtils {
                 else {
                     dataList = new ArrayList<>();
                 }
-                LoggerUtils.logInfo(MyzticCore.getPrefix(), "Loaded data from file");
+                LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "Loaded data from file");
                 return dataList;
             } catch (FileNotFoundException e) {
-                LoggerUtils.logError(MyzticCore.getPrefix(), "Error occurred: " + e.getMessage(), e);
+                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Error occurred: " + e.getMessage(), e);
             }
         }
         return null;

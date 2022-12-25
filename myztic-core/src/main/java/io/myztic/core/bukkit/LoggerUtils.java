@@ -20,6 +20,13 @@ public class LoggerUtils {
         }
     }
 
+    public static void logDebugError(String prefix, String text, boolean debugMode, Exception e) {
+        Bukkit.getLogger().warning(ChatUtils.parseColors(processPrefix(prefix, text), true));
+        if(debugMode) {
+            e.printStackTrace();
+        }
+    }
+
     public static void logInfo(String prefix, String text) {
         Bukkit.getLogger().info(ChatUtils.parseColors(processPrefix(prefix, text), true));
     }

@@ -1,2 +1,13 @@
-plugin-prefix: "&[MyzticCore]"
+plugin-prefix: "&a[MyzticCore]"
 debug-mode: false
+
+sql-database-details:
+  use: true
+  host: ""
+  user: ""
+  password: ""
+  database: ""
+  port: ""
+  driver: ""
+  tls-version: ""
+  use-SSL: false
