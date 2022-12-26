@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 public interface SQL {
 
     Connection getConnection();
-    void setConnection(String host, String user, String password, String database, String port);
+    void setConnectionAsync(String host, String user, String password, String database, String port);
     void connect();
     void disconnect();
     void reconnect();
