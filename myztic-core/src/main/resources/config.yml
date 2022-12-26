@@ -3,11 +3,11 @@ debug-mode: false
 
 sql-database-details:
   use: true
-  host: ""
-  user: ""
-  password: ""
-  database: ""
-  port: ""
-  driver: ""
+  host: "hostname"
+  user: "user"
+  password: "pwd"
+  database: "dbname"
+  port: 0000
+  driver: "mysql"
   tls-version: ""
   use-SSL: false

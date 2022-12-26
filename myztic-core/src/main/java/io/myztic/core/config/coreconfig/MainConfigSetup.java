@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class MainConfigSetup {
+public final class MainConfigSetup {
 
     private static final String MAIN_CONFIG_NAME = "config.yml";
     private File mainConfigFile = null;

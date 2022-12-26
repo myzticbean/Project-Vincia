@@ -1,5 +1,7 @@
 package io.myztic.core.bukkit;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 
@@ -29,6 +31,10 @@ public class LoggerUtils {
 
     public static void logInfo(String prefix, String text) {
         Bukkit.getLogger().info(ChatUtils.parseColors(processPrefix(prefix, text), true));
+    }
+
+    public static void logInfoSuccess(String prefix, String text) {
+        Bukkit.getLogger().info(ChatUtils.parseColors(prefix + " &a" + text, false));
     }
 
     public static void logError(String prefix, String text) {
