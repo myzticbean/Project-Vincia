@@ -3,6 +3,7 @@ package io.myztic.core.database.sql;
 import io.myztic.core.MyzticCore;
 import io.myztic.core.bukkit.LoggerUtils;
 import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.exceptions.CoreException;
 import org.bukkit.Bukkit;
 
 import java.sql.*;
@@ -48,7 +49,7 @@ public class MySQL implements SQL {
                     con = DriverManager.getConnection(conUrlSb.toString(), user, password);
                     LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL connection established");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, SQL_CONN_ERROR_MSG + e.getMessage(), e);
             }
         });

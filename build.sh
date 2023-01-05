@@ -2,15 +2,20 @@
 echo "-----------------------------"
 echo "Running maven build commands"
 echo "-----------------------------"
-cd myztic-core
-mvn clean package install
-cd ../
-cd myztic-essentials
-mvn clean package install
-cd ../
-cd myztic-streak-system
-mvn clean package install
-cd ../
-cd myztic-world-manager
-mvn clean package install
+echo Removing existing compiled jars...
+rm target/*
+declare -a StringArray=(
+  "myztic-core"
+  "myztic-essentials"
+  "myztic-streak-system"
+  "myztic-world-manager"
+  "myztic-player-profiles")
+for val in ${StringArray[@]}; do
+   echo "Building project "$val"..."
+   cd $val
+   mvn clean package install
+   cd ../
+done
+echo "-----------------------------------"
 echo "Completed executing maven commands"
+echo "-----------------------------------"

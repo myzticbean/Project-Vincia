@@ -19,6 +19,14 @@ public class ConfigProvider {
     public final String SQL_DRIVER = getFormattedString(MainConfigSetup.getInst().get().getString("sql-database-details.driver"));
     public final String SQL_TLS_VERSION = getFormattedString(MainConfigSetup.getInst().get().getString("sql-database-details.tls-version"));
     public final boolean SQL_USE_SSL = getFormattedBooleanFromString(MainConfigSetup.getInst().get().getString("sql-database-details.use-SSL"));
+    public final boolean NOSQL_USE = MainConfigSetup.getInst().get().getBoolean("nosql-database-details.use");
+    public final String NOSQL_HOST = getFormattedString(MainConfigSetup.getInst().get().getString("nosql-database-details.host"));
+    public final String NOSQL_USER = getFormattedString(MainConfigSetup.getInst().get().getString("nosql-database-details.user"));
+    public final String NOSQL_PASSWORD = getFormattedString(MainConfigSetup.getInst().get().getString("nosql-database-details.password"));
+    public final String NOSQL_DB = getFormattedString(MainConfigSetup.getInst().get().getString("nosql-database-details.database"));
+    public final int NOSQL_PORT = MainConfigSetup.getInst().get().getInt("nosql-database-details.port");
+    public final String NOSQL_DRIVER = getFormattedString(MainConfigSetup.getInst().get().getString("nosql-database-details.driver"));
+    public final boolean NOSQL_USE_SSL = getFormattedBooleanFromString(MainConfigSetup.getInst().get().getString("nosql-database-details.use-SSL"));
 
 
     private String getFormattedString(String text) {

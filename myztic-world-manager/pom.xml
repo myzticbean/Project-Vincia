@@ -6,7 +6,7 @@
 
     <groupId>io.myztic</groupId>
     <artifactId>MyzticWorldManager</artifactId>
-    <version>1.0-dev</version>
+    <version>0.0.1-dev</version>
     <packaging>jar</packaging>
 
     <name>MyzticWorldManager</name>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>io.myztic</groupId>
             <artifactId>MyzticCore</artifactId>
-            <version>1.0-dev</version>
+            <version>0.0.1-dev</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

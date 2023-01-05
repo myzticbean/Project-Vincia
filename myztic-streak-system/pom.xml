@@ -6,7 +6,7 @@
 
     <groupId>io.myztic</groupId>
     <artifactId>MyzticStreakSystem</artifactId>
-    <version>1.0-dev</version>
+    <version>0.0.1-dev</version>
     <packaging>jar</packaging>
 
     <name>MyzticStreakSystem</name>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>io.myztic</groupId>
             <artifactId>MyzticCore</artifactId>
-            <version>1.0-dev</version>
+            <version>0.0.1-dev</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>

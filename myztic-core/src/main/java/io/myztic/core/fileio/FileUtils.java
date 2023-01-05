@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.myztic.core.bukkit.LoggerUtils;
 import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.exceptions.UtilityClassException;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +17,9 @@ import java.util.List;
 
 public class FileUtils {
 
-    private FileUtils() { }
+    private FileUtils() {
+        throw new UtilityClassException();
+    }
 
     public static <T> void saveDataToJsonFile(Plugin pluginInstance, String fileName, List<T> listToBeSaved) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

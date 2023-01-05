@@ -6,7 +6,7 @@
 
     <groupId>io.myztic</groupId>
     <artifactId>MyzticCore</artifactId>
-    <version>1.0-dev</version>
+    <version>0.0.1-dev</version>
     <packaging>jar</packaging>
 
     <name>MyzticCore</name>
@@ -140,6 +140,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.8.1</version>
         </dependency>
     </dependencies>
 </project>
