@@ -1,9 +1,8 @@
 package io.myztic.core.database.sql;
 
 import io.myztic.core.MyzticCore;
-import io.myztic.core.bukkit.LoggerUtils;
 import io.myztic.core.config.ConfigProvider;
-import io.myztic.core.exceptions.CoreException;
+import io.myztic.core.logging.LogUtil;
 import org.bukkit.Bukkit;
 
 import java.sql.*;
@@ -34,7 +33,7 @@ public class MySQL implements SQL {
             try {
                 String driver = ConfigProvider.getInst().SQL_DRIVER;
                 if (driver.length() == 0) {
-                    LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Driver is blank");
+                    LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Driver is blank");
                 } else {
                     driver = driver.toLowerCase();
                     String tlsVersion = ConfigProvider.getInst().SQL_TLS_VERSION;
@@ -45,12 +44,20 @@ public class MySQL implements SQL {
                         .append("?autoReconnect=true&maxReconnects=10")
                         .append(((tlsVersion != null && tlsVersion.length() > 0) ? ("&enabledTLSProtocols=TLSv" + tlsVersion) : ""))
                         .append("&useSSL=").append(ConfigProvider.getInst().SQL_USE_SSL);
-                    LoggerUtils.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, conUrlSb.toString() + " | username=" + user + " | password=" + password, ConfigProvider.getInst().DEBUG_MODE);
+                    LogUtil.logDebugInfo(
+                            ConfigProvider.getInst().PLUGIN_PREFIX,
+                            conUrlSb.toString() + " | username=" + user + " | password=" + password,
+                            ConfigProvider.getInst().DEBUG_MODE);
                     con = DriverManager.getConnection(conUrlSb.toString(), user, password);
-                    LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL connection established");
+                    LogUtil.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL connection established");
                 }
             } catch (SQLException e) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, SQL_CONN_ERROR_MSG + e.getMessage(), e);
+                LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, SQL_CONN_ERROR_MSG + e.getMessage(), ConfigProvider.getInst().DEBUG_MODE, e);
+                /*
+                try { Thread.sleep(10000); } catch (InterruptedException ignored) { }
+                LogUtil.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL: Attempting to reconnect...");
+                connect();
+                 */
             }
         });
     }
@@ -64,22 +71,22 @@ public class MySQL implements SQL {
             String database = ConfigProvider.getInst().SQL_DB;
             String port = String.valueOf(ConfigProvider.getInst().SQL_PORT);
             if (isConnected()) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, SQL_CONN_ERROR_MSG + "Already connected");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, SQL_CONN_ERROR_MSG + "Already connected");
             } else if (host.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Host is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Host is blank");
             } else if (user.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: User is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: User is blank");
             } else if (password.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Password is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Password is blank");
             } else if (database.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Database is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Database is blank");
             } else if (port.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Port is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Port is blank");
             } else {
                 setConnectionAsync(host, user, password, database, port);
             }
         } else {
-            LoggerUtils.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL is disabled", ConfigProvider.getInst().DEBUG_MODE);
+            LogUtil.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL is disabled", ConfigProvider.getInst().DEBUG_MODE);
         }
     }
 
@@ -89,16 +96,16 @@ public class MySQL implements SQL {
             try {
                 if (isConnected()) {
                     con.close();
-                    LoggerUtils.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL disconnected");
+                    LogUtil.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL disconnected");
                 } else {
-                    LoggerUtils.logWarning(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Disconnect Error: No existing connection");
+                    LogUtil.logWarning(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Disconnect Error: No existing connection");
                 }
             } catch (Exception e) {
-                LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Disconnect Error: " + e.getMessage(),ConfigProvider.getInst().DEBUG_MODE, e);
+                LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Disconnect Error: " + e.getMessage(),ConfigProvider.getInst().DEBUG_MODE, e);
             }
             con = null;
         } else {
-            LoggerUtils.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL is disabled", ConfigProvider.getInst().DEBUG_MODE);
+            LogUtil.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL is disabled", ConfigProvider.getInst().DEBUG_MODE);
         }
     }
 
@@ -114,7 +121,7 @@ public class MySQL implements SQL {
             try {
                 return !con.isClosed();
             } catch (Exception e) {
-                LoggerUtils.logDebugError(
+                LogUtil.logDebugError(
                         ConfigProvider.getInst().PLUGIN_PREFIX,
                         "SQL Connection Error >> " + e.getMessage(),
                         ConfigProvider.getInst().DEBUG_MODE,
@@ -128,10 +135,11 @@ public class MySQL implements SQL {
         if (command == null)
             return false;
         boolean result = false;
-        LoggerUtils.logDebugInfo(
+        LogUtil.logDebugInfo(
                 ConfigProvider.getInst().PLUGIN_PREFIX,
                 "Update statement to be executed: " + command,
                 ConfigProvider.getInst().DEBUG_MODE);
+        /*
         Statement st = null;
         try {
             connect();
@@ -145,7 +153,7 @@ public class MySQL implements SQL {
         } catch (Exception e) {
             String message = e.getMessage();
             if (message != null) {
-                LoggerUtils.logDebugError(
+                LogUtil.logDebugError(
                         ConfigProvider.getInst().PLUGIN_PREFIX,
                         "SQL Update command: " + command + " >> " + e.getMessage(),
                         ConfigProvider.getInst().DEBUG_MODE,
@@ -157,13 +165,32 @@ public class MySQL implements SQL {
                     st.close();
                 }
             } catch (SQLException e) {
-                LoggerUtils.logDebugError(
+                LogUtil.logDebugError(
                         ConfigProvider.getInst().PLUGIN_PREFIX,
                         "SQL Error >> " + e.getMessage(),
                         ConfigProvider.getInst().DEBUG_MODE,
                         e);
             }
             disconnect();
+        }
+        */
+        connect();
+        if (con != null) {
+            try (Statement st = con.createStatement()) {
+                st.executeUpdate(command);
+                result = true;
+            } catch (Exception e) {
+                String message = e.getMessage();
+                if (message != null) {
+                    LogUtil.logDebugError(
+                            ConfigProvider.getInst().PLUGIN_PREFIX,
+                            "SQL Update command: " + command + " >> " + e.getMessage(),
+                            ConfigProvider.getInst().DEBUG_MODE,
+                            e);
+                }
+            } finally {
+                disconnect();
+            }
         }
         return result;
     }
@@ -183,7 +210,7 @@ public class MySQL implements SQL {
         } catch (Exception e) {
             String message = e.getMessage();
             if (message != null) {
-                LoggerUtils.logDebugError(
+                LogUtil.logDebugError(
                         ConfigProvider.getInst().PLUGIN_PREFIX,
                         "SQL Query command: " + command + " >> " + e.getMessage(),
                         ConfigProvider.getInst().DEBUG_MODE,
@@ -195,7 +222,7 @@ public class MySQL implements SQL {
                     st.close();
                 }
             } catch (SQLException e) {
-                LoggerUtils.logDebugError(
+                LogUtil.logDebugError(
                         ConfigProvider.getInst().PLUGIN_PREFIX,
                         "SQL Error >> " + e.getMessage(),
                         ConfigProvider.getInst().DEBUG_MODE,

@@ -1,6 +1,6 @@
 package io.myztic.core.config;
 
-import io.myztic.core.bukkit.LoggerUtils;
+import io.myztic.core.logging.LogUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -14,7 +14,7 @@ public class ConfigSetup {
     public static File setupConfig(Plugin pluginInstance, String pluginPrefix, String configFileName) {
         File configFile = new File(pluginInstance.getDataFolder(), configFileName);
         if(!configFile.exists()) {
-            LoggerUtils.logInfo(pluginPrefix, "Generated a new " + configFileName);
+            LogUtil.logInfo(pluginPrefix, "Generated a new " + configFileName);
             pluginInstance.saveResource(configFileName, false);
             loadConfig(configFile).options().copyDefaults(true);
         }

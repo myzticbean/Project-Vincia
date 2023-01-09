@@ -2,8 +2,8 @@ package io.myztic.core.database.nosql;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
-import io.myztic.core.bukkit.LoggerUtils;
 import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.logging.LogUtil;
 
 public class MongoDBImpl {
 
@@ -39,22 +39,22 @@ public class MongoDBImpl {
             String database = ConfigProvider.getInst().NOSQL_DB;
             String port = String.valueOf(ConfigProvider.getInst().NOSQL_PORT);
             if (isConnected()) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, MONGO_CONN_ERROR_MSG + "Already connected");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, MONGO_CONN_ERROR_MSG + "Already connected");
             } else if (host.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Host is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Host is blank");
             } else if (user.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: User is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: User is blank");
             } else if (password.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Password is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Password is blank");
             } else if (database.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Database is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Database is blank");
             } else if (port.length() == 0) {
-                LoggerUtils.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Port is blank");
+                LogUtil.logError(ConfigProvider.getInst().PLUGIN_PREFIX, "Config Error: Port is blank");
             } else {
 //                setConnectionAsync(host, user, password, database, port);
             }
         } else {
-            LoggerUtils.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL is disabled", ConfigProvider.getInst().DEBUG_MODE);
+            LogUtil.logDebugInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL is disabled", ConfigProvider.getInst().DEBUG_MODE);
         }
         return true;
     }

@@ -1,7 +1,7 @@
 package io.myztic.core.database.sql;
 
-import io.myztic.core.bukkit.LoggerUtils;
 import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.logging.LogUtil;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -23,7 +23,7 @@ public class MySQLActions implements SQLActions {
             if (rs.next())
                 return true;
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return false;
     }
@@ -69,7 +69,7 @@ public class MySQLActions implements SQLActions {
             if (rs.next())
                 return true;
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return false;
     }
@@ -137,7 +137,7 @@ public class MySQLActions implements SQLActions {
                 insertData(column + ", " + selected, data + ", " + object, table);
             }
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return false;
     }
@@ -193,7 +193,7 @@ public class MySQLActions implements SQLActions {
             if (rs.next())
                 return rs.getObject(selected);
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return null;
     }
@@ -217,7 +217,7 @@ public class MySQLActions implements SQLActions {
             while (rs.next())
                 array.add(rs.getObject(selected));
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return array;
     }
@@ -231,7 +231,7 @@ public class MySQLActions implements SQLActions {
             if (rs.next())
                 return rs.getObject(selected);
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return null;
     }
@@ -246,7 +246,7 @@ public class MySQLActions implements SQLActions {
             while (rs.next())
                 array.add(rs.getObject(selected));
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return array;
     }
@@ -261,7 +261,7 @@ public class MySQLActions implements SQLActions {
             while (rs.next())
                 i++;
         } catch (Exception exception) {
-            LoggerUtils.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
+            LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL Error: " + exception.getMessage(), ConfigProvider.getInst().DEBUG_MODE, exception);
         }
         return i;
     }

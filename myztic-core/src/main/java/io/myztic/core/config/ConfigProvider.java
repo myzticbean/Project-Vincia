@@ -1,6 +1,6 @@
 package io.myztic.core.config;
 
-import io.myztic.core.bukkit.ChatUtils;
+import io.myztic.core.bukkit.ChatUtil;
 import io.myztic.core.config.coreconfig.MainConfigSetup;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +31,7 @@ public class ConfigProvider {
 
     private String getFormattedString(String text) {
         if(text != null) {
-            return ChatUtils.parseColors(text, true);
+            return ChatUtil.parseColors(text, true);
         } else {
             return StringUtils.EMPTY;
         }

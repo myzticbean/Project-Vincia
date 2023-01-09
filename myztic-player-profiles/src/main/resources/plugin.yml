@@ -1,4 +1,4 @@
-name: Myztic Player Profiles
+name: MyzticPlayerProfiles
 version: '${project.version}'
 main: io.myztic.playerprofiles.MyzticPlayerProfiles
 api-version: 1.19

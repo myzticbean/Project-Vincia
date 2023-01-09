@@ -1,6 +1,5 @@
 package io.myztic.worldmanager;
 
-import io.myztic.core.bukkit.LoggerUtils;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,7 +12,7 @@ public final class MyzticWorldManager extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        LoggerUtils.logInfo(PLUGIN_PREFIX, "Starting MyzticWorldManager");
+
     }
 
     @Override
