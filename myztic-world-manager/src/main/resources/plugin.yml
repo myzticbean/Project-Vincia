@@ -4,5 +4,6 @@ main: io.myztic.worldmanager.MyzticWorldManager
 api-version: 1.19
 load: STARTUP
 authors: [ myzticbean ]
-depend:
+softdepend:
   - MyzticCore
+  - Multiverse-Core

@@ -4,3 +4,5 @@ main: io.myztic.core.MyzticCore
 api-version: 1.19
 load: STARTUP
 authors: [ myzticbean ]
+softdepend:
+  - Multiverse-Core

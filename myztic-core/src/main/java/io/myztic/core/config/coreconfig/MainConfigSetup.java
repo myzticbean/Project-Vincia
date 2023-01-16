@@ -3,7 +3,6 @@ package io.myztic.core.config.coreconfig;
 import io.myztic.core.MyzticCore;
 import io.myztic.core.config.ConfigSetup;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
@@ -25,15 +24,12 @@ public final class MainConfigSetup {
     }
 
     public void loadConfig() {
-        configFileConfiguration = YamlConfiguration.loadConfiguration(mainConfigFile);
+        configFileConfiguration = ConfigSetup.loadConfig(mainConfigFile);
     }
 
     public FileConfiguration get() {
         return configFileConfiguration;
     }
 
-    public FileConfiguration reloadConfig(File configFile) {
-        return YamlConfiguration.loadConfiguration(configFile);
-    }
 
 }

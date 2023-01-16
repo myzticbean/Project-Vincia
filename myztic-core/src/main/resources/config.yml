@@ -1,3 +1,5 @@
+config-version: 1
+
 plugin-prefix: "&a[MyzticCore]"
 debug-mode: false
 

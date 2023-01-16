@@ -1,5 +1,6 @@
 package io.myztic.core;
 
+import io.myztic.core.commands.corecommand.MyzticCoreCmd;
 import io.myztic.core.config.coreconfig.MainConfigSetup;
 import io.myztic.core.database.sql.MySQL;
 import io.myztic.core.logging.LogUtil;
@@ -22,10 +23,11 @@ public final class MyzticCore extends JavaPlugin {
         MainConfigSetup.getInst().setupConfig();
         MainConfigSetup.getInst().loadConfig();
         registerTaskTimers();
+        registerCommands();
         MySQL.getInst().connect();
 
         // @TODO: for testing, to be removed later
-        TimedTaskHandler.addTaskTo5SecTaskQueue();
+//        TimedTaskHandler.addTaskTo5SecTaskQueue();
     }
 
     private void setPluginInst() {
@@ -37,6 +39,7 @@ public final class MyzticCore extends JavaPlugin {
     @Override
     public void onDisable() {
         MySQL.getInst().disconnect();
+        Bukkit.getScheduler().cancelTasks(this);
     }
 
     public static String getPrefix() {
@@ -48,5 +51,9 @@ public final class MyzticCore extends JavaPlugin {
         Bukkit.getServer().getScheduler().runTaskTimer(this, new TaskTimer5Sec(), 0, 5*20L);
         Bukkit.getServer().getScheduler().runTaskTimer(this, new TaskTimer30Sec(), 0, 30*20L);
         Bukkit.getServer().getScheduler().runTaskTimer(this, new TaskTimer5Min(), 0, 5*60*20L);
+    }
+
+    private void registerCommands() {
+        new MyzticCoreCmd().createCoreCommand();
     }
 }

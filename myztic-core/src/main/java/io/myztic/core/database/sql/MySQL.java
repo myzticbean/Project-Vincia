@@ -1,9 +1,10 @@
 package io.myztic.core.database.sql;
 
 import io.myztic.core.MyzticCore;
-import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.bukkit.BukkitUtil;
+import io.myztic.core.config.coreconfig.ConfigProvider;
 import io.myztic.core.logging.LogUtil;
-import org.bukkit.Bukkit;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
 
@@ -19,14 +20,14 @@ public class MySQL implements SQL {
         return mySQL;
     }
 
-    @Override
+    @Override @Nullable
     public Connection getConnection() {
         return con;
     }
 
     @Override
     public void setConnectionAsync(String host, String user, String password, String database, String port) {
-        Bukkit.getScheduler().runTaskAsynchronously(MyzticCore.getInst(), () -> {
+        BukkitUtil.runOnAsyncThread(MyzticCore.getInst(), () -> {
             if (host == null || user == null || password == null || database == null)
                 return;
             disconnect();
@@ -53,11 +54,6 @@ public class MySQL implements SQL {
                 }
             } catch (SQLException e) {
                 LogUtil.logDebugError(ConfigProvider.getInst().PLUGIN_PREFIX, SQL_CONN_ERROR_MSG + e.getMessage(), ConfigProvider.getInst().DEBUG_MODE, e);
-                /*
-                try { Thread.sleep(10000); } catch (InterruptedException ignored) { }
-                LogUtil.logInfo(ConfigProvider.getInst().PLUGIN_PREFIX, "SQL: Attempting to reconnect...");
-                connect();
-                 */
             }
         });
     }
@@ -139,41 +135,6 @@ public class MySQL implements SQL {
                 ConfigProvider.getInst().PLUGIN_PREFIX,
                 "Update statement to be executed: " + command,
                 ConfigProvider.getInst().DEBUG_MODE);
-        /*
-        Statement st = null;
-        try {
-            connect();
-            if (con != null) {
-                st = con.createStatement();
-                st.executeUpdate(command);
-                st.close();
-                result = true;
-
-            }
-        } catch (Exception e) {
-            String message = e.getMessage();
-            if (message != null) {
-                LogUtil.logDebugError(
-                        ConfigProvider.getInst().PLUGIN_PREFIX,
-                        "SQL Update command: " + command + " >> " + e.getMessage(),
-                        ConfigProvider.getInst().DEBUG_MODE,
-                        e);
-            }
-        } finally {
-            try {
-                if(st != null && !st.isClosed()) {
-                    st.close();
-                }
-            } catch (SQLException e) {
-                LogUtil.logDebugError(
-                        ConfigProvider.getInst().PLUGIN_PREFIX,
-                        "SQL Error >> " + e.getMessage(),
-                        ConfigProvider.getInst().DEBUG_MODE,
-                        e);
-            }
-            disconnect();
-        }
-        */
         connect();
         if (con != null) {
             try (Statement st = con.createStatement()) {
@@ -195,40 +156,27 @@ public class MySQL implements SQL {
         return result;
     }
 
-    @Override
+    @Override @Nullable
     public ResultSet query(String command) {
         if (command == null)
             return null;
         connect();
         ResultSet rs = null;
-        Statement st =null;
-        try {
-            if (con != null) {
-                st = con.createStatement();
+        if (con != null) {
+            try (Statement st = con.createStatement()) {
                 rs = st.executeQuery(command);
-            }
-        } catch (Exception e) {
-            String message = e.getMessage();
-            if (message != null) {
-                LogUtil.logDebugError(
-                        ConfigProvider.getInst().PLUGIN_PREFIX,
-                        "SQL Query command: " + command + " >> " + e.getMessage(),
-                        ConfigProvider.getInst().DEBUG_MODE,
-                        e);
-            }
-        } finally {
-            try {
-                if(st != null && !st.isClosed()) {
-                    st.close();
+            } catch (Exception e) {
+                String message = e.getMessage();
+                if (message != null) {
+                    LogUtil.logDebugError(
+                            ConfigProvider.getInst().PLUGIN_PREFIX,
+                            "SQL Query command: " + command + " >> " + e.getMessage(),
+                            ConfigProvider.getInst().DEBUG_MODE,
+                            e);
                 }
-            } catch (SQLException e) {
-                LogUtil.logDebugError(
-                        ConfigProvider.getInst().PLUGIN_PREFIX,
-                        "SQL Error >> " + e.getMessage(),
-                        ConfigProvider.getInst().DEBUG_MODE,
-                        e);
+            } finally {
+                disconnect();
             }
-            disconnect();
         }
         return rs;
     }

@@ -1,6 +1,6 @@
 package io.myztic.core.database.sql;
 
-import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.config.coreconfig.ConfigProvider;
 import io.myztic.core.logging.LogUtil;
 
 import java.sql.Connection;

@@ -3,14 +3,17 @@ package io.myztic.core.fileio;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.MyzticCore;
+import io.myztic.core.config.coreconfig.ConfigProvider;
 import io.myztic.core.exceptions.UtilityClassException;
 import io.myztic.core.logging.LogUtil;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +24,13 @@ public class FileUtil {
         throw new UtilityClassException();
     }
 
+    /**
+     *
+     * @param pluginInstance the plugin instance
+     * @param fileName name of file
+     * @param listToBeSaved the list to be saved into JSON file
+     * @param <T> type of object
+     */
     public static <T> void saveDataToJsonFile(Plugin pluginInstance, String fileName, List<T> listToBeSaved) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File file = new File(pluginInstance.getDataFolder().getAbsolutePath() + File.pathSeparator + fileName);
@@ -44,6 +54,13 @@ public class FileUtil {
         }
     }
 
+    /**
+     *
+     * @param pluginInstance the plugin instance
+     * @param fileName name of JSON file
+     * @return list of data object
+     * @param <T>
+     */
     @Nullable
     public static <T> List<T> retrieveDataFromJsonFile(Plugin pluginInstance, String fileName) {
         Gson gson = new Gson();
@@ -70,6 +87,32 @@ public class FileUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * This method copies one file to another location
+     * Reimplementation of Bukkit's FileUtils.copy() method
+     *
+     * @param inFile the source filename
+     * @param outFile the target filename
+     * @return true on success
+     */
+    public static boolean copy(@NotNull File inFile, @NotNull File outFile) {
+        if (!inFile.exists()) {
+            return false;
+        }
+        try (FileChannel in = new FileInputStream(inFile).getChannel();
+             FileChannel out = new FileOutputStream(outFile).getChannel()) {
+            long pos = 0;
+            long size = in.size();
+            while (pos < size) {
+                pos += in.transferTo(pos, 10 * 1024 * 1024, out);
+            }
+        } catch (IOException ioe) {
+            LogUtil.logError(MyzticCore.getPrefix(), "Error occurred while copying file", ioe);
+            return false;
+        }
+        return true;
     }
 
 }

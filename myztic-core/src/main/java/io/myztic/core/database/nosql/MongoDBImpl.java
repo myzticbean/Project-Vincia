@@ -2,7 +2,7 @@ package io.myztic.core.database.nosql;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
-import io.myztic.core.config.ConfigProvider;
+import io.myztic.core.config.coreconfig.ConfigProvider;
 import io.myztic.core.logging.LogUtil;
 
 public class MongoDBImpl {

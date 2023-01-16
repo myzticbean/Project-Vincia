@@ -1,0 +1,13 @@
+config-version: 1
+plugin-prefix: ""
+debug-mode: false
+
+main-world:
+  world-name: "hcWorld"
+  seed: "-603181651"
+  datapack-path: "mog_extended_L4.zip"
+
+resource-world:
+  world-name: ""
+  seed: ""
+  datapack-path: ""
