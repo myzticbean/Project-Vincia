@@ -78,7 +78,7 @@ public class BukkitUtil {
     }
 
     public static void runOnAsyncThread(Plugin plugin, @NotNull Runnable runnable) {
-        if(!Bukkit.isPrimaryThread()) {
+        if(Bukkit.isPrimaryThread()) {
             Bukkit.getScheduler().runTaskAsynchronously(plugin, runnable);
         }
         runnable.run();
