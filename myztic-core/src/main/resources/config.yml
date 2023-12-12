@@ -1,0 +1,30 @@
+config-version: 1
+
+plugin-prefix: "&a[MyzticCore]"
+debug-mode: false
+
+# driver: {mysql}
+sql-database-details:
+  use: true
+  driver: "mysql"
+  host: "hostname"
+  user: "user"
+  password: "pwd"
+  database: "dbname"
+  port: 0000
+  tls-version: ""
+  use-SSL: false
+
+# driver: {mongodb,dynamodb}
+nosql-database-details:
+  use: true
+  driver: "mongodb"
+  host: ""
+  port: 0
+  database: ""
+  user: ""
+  password: ""
+  cluster-name: ""
+  max-pool-size: 0
+  retry-writes: true
+  use-SSL: false

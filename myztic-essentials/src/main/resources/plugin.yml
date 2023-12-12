@@ -1,0 +1,6 @@
+name: MyzticEssentials
+version: '${project.version}'
+main: io.myztic.essentials.MyzticEssentials
+api-version: 1.19
+depend: [ MyzticCore ]
+authors: [ myzticbean ]
